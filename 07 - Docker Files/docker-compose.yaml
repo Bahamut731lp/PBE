@@ -1,0 +1,51 @@
+version: '3'
+name: pbe_7_dns_dnssec
+services:
+  dnsmasq:
+    container_name: "dnsmasq"
+    image: "drpsychick/dnsmasq:latest"
+    privileged: true
+    networks:
+      pbe:
+        ipv4_address: 172.20.0.5
+    environment:
+      - DMQ_DHCP_DNS=dhcp-option=option:dns-server,172.20.0.5,8.8.8.8,8.8.4.4
+      - DMQ_DHCP_GATEWAY=dhcp-option=3,172.20.0.1
+      - DMQ_DHCP_RANGES=dhcp-range=172.20.0.10,172.20.0.100,24h
+      - DMQ_DNS_DOMAIN=domain=lan
+      - DMQ_DNS_FLAGS=expand-hosts\ndomain-needed\nselfmx\ndns-loop-detect
+      - DMQ_DNS_LOCAL=local=/lan/
+      - DMQ_DNS_RESOLV=no-resolv
+      - DMQ_DNS_SERVER=server=172.20.0.6\nserver=8.8.8.8\nserver=8.8.4.4
+
+  client_1:
+    container_name: "client_1"
+    build:
+      context: .
+      dockerfile: client.dockerfile
+    tty: true
+    privileged: true
+    stdin_open: true
+    depends_on:
+      - dnsmasq
+    networks:
+      - pbe
+
+  client_2:
+    container_name: "client_2"
+    build:
+      context: .
+      dockerfile: client.dockerfile
+    tty: true
+    privileged: true
+    stdin_open: true
+    depends_on:
+      - dnsmasq
+    networks:
+      - pbe
+
+networks:
+  pbe:
+    ipam:
+      config:
+        - subnet: "172.20.0.0/16"
