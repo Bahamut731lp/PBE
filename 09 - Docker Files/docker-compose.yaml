@@ -1,0 +1,33 @@
+version: '3'
+name: pbe_9_ssh_tunneling
+services:
+  proxy:
+    container_name: "proxy"
+    build:
+      context: .
+      dockerfile: client.dockerfile
+    tty: true
+    privileged: true
+    stdin_open: true
+    ports:
+      - 80:80
+    networks:
+      - mc
+
+  mc:
+    build:
+      context: .
+      dockerfile: mc.dockerfile
+    tty: true
+    stdin_open: true
+    environment:
+      EULA: "TRUE"
+      VERSION: "1.16.1"
+    volumes:
+      # attach the relative directory 'data' to the container's /data path
+      - ./data:/data
+    networks:
+      - mc
+
+networks:
+  mc:
