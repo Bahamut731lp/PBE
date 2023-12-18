@@ -146,8 +146,8 @@
 26. frekvenční analýza
 - [ ] může být eliminována transpozičními šifrovacími metodami
 - [ ] může být eliminována transpozičními šifrovacími metodami
-- [ ] může být eliminována homofonními šiframi
-- [X] může být eliminována pouze asymetrickou kryptografií
+- [X] může být eliminována homofonními šiframi
+- [ ] může být eliminována pouze asymetrickou kryptografií
 
 27. Vlákno (Thread)
 - [X] je odlehčený proces, jeden plnohodnotný proces se může skládat z více vláken
