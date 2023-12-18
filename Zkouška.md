@@ -159,5 +159,10 @@
 - [ ] jednovláknové jádro, vícevláknové jádro a hybridní jádro
 - [X] monolitické jádro, mikrojádro, hybridní jádro
 - [ ] endokernel, exokernel, mezokernel
-- [ ] paralelní jádro, s=riové jádro, seriově-paralelní jádro
- - frekko- [ ] 
+- [ ] paralelní jádro, sériové jádro, seriově-paralelní jádro
+
+29. Co je deadlock v kontextu operačních systémů?
+- [ ] Nelegální přístup k systémovým souborům
+- [ ] Chyba v paměti
+- [X] Situace, kdy dva nebo více procesů jsou blokovány, protože každý čeká na událost, kterou způsobil jiný proces
+- [ ] Souběh procesů
